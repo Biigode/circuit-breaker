@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  fornecedor1:
+    build:
+      context: . # Aponta para o diretório raiz onde o Dockerfile.fornecedor1 está localizado
+      dockerfile: DockerFile.fornecedor1 # Especifica o arquivo Dockerfile
+    ports:
+      - "3002:3002"
+    networks:
+      - app-network
+
+  fornecedor2:
+    build:
+      context: . # Aponta para o diretório raiz onde o Dockerfile.fornecedor2 está localizado
+      dockerfile: Dockerfile.fornecedor2 # Especifica o arquivo Dockerfile
+    ports:
+      - "3003:3003"
+    networks:
+      - app-network
+
+  fornecedor3:
+    build:
+      context: . # Aponta para o diretório raiz onde o Dockerfile.fornecedor3 está localizado
+      dockerfile: Dockerfile.fornecedor3 # Especifica o arquivo Dockerfile
+    ports:
+      - "3004:3004"
+    networks:
+      - app-network
+
+  consolidador:
+    build:
+      context: . # Aponta para o diretório raiz onde o DockerFile.consolidador está localizado
+      dockerfile: DockerFile.consolidador # Especifica o arquivo Dockerfile
+    depends_on:
+      - fornecedor1
+      - fornecedor2
+      - fornecedor3
+    environment:
+      - NODE_ENV=production
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

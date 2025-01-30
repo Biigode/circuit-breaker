@@ -1,0 +1,23 @@
+# Usando a versão leve do Node.js
+FROM node:23.6.1-alpine3.20
+
+# Definindo diretório de trabalho dentro do container
+WORKDIR /app
+
+# Copiando os arquivos necessários
+COPY package.json package-lock.json ./
+
+# Instalando as dependências
+RUN npm install
+
+# Copiando os arquivos TypeScript
+COPY . .
+
+# Compilando os arquivos TypeScript para JavaScript
+RUN npm run build
+
+# Expondo a porta do serviço
+EXPOSE 3004
+
+# Iniciando o servidor Node.js com os arquivos JS compilados
+CMD ["npm", "run", "start:prd:fornecedor3"]

@@ -1,34 +1,34 @@
-import express, { Request, Response } from "express";
+import express from "express";
 
 const app = express();
 app.use(express.json());
 
-app.get("/precos", (req: Request, res: Response) => {
+app.get("/precos", (req, res) => {
   const produtos = [
     {
       id: 1,
       nome: "Arroz",
-      preco: 20,
+      preco: 10,
     },
     {
       id: 2,
       nome: "Feijão",
-      preco: 18,
+      preco: 8,
     },
     {
       id: 3,
       nome: "Macarrão",
-      preco: 15,
+      preco: 5,
     },
     {
       id: 4,
       nome: "Carne",
-      preco: 40,
+      preco: 25,
     },
   ];
   res.json(produtos);
 });
 
-app.listen(3004, () => {
-  console.log("Fornecedor 1 executando na porta 3004");
+app.listen(3002, () => {
+  console.log("Fornecedor 1 executando na porta 3002");
 });

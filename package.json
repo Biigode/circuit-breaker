@@ -4,15 +4,26 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start:dev:consolidador": "node --experimental-transform-types ./src/consolidador_precos.ts",
+    "start:dev:fornecedor": "node --experimental-transform-types ./src/fornecedor_1.ts",
+    "start:dev:fornecedor2": "node --experimental-transform-types ./src/fornecedor_2.ts",
+    "start:dev:fornecedor3": "node --experimental-transform-types ./src/fornecedor_3.ts",
+    "start:prd:consolidador": "node ./dist/consolidador_precos.js",
+    "start:prd:fornecedor": "node ./dist/fornecedor_1.js",
+    "start:prd:fornecedor2": "node ./dist/fornecedor_2.js",
+    "start:prd:fornecedor3": "node ./dist/fornecedor_3.js",
+    "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^5.0.1"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0"
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.7",
+    "typescript": "^5.7.3"
   }
 }
