@@ -4,6 +4,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/precos", (req, res) => {
+  console.log("Recebendo  requisição no fornecedor 1");
   const produtos = [
     {
       id: 1,

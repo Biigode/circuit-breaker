@@ -1,20 +1,28 @@
 import { CircuitBreaker } from "./circuit_breaker.ts";
 
-// URLs dos fornecedores
-const FORNECEDOR_1 = "http://localhost:3002/precos";
+const FORNECEDOR_1 = process.env.FORNECEDOR_1_URL || "";
+const FALLBACK_1 = process.env.FALLBACK_1_URL || "";
+const FALLBACK_2 = process.env.FALLBACK_2_URL || "";
 
-// URLs dos fallbacks
-const FALLBACK_1 = "http://localhost:3003/precos";
-const FALLBACK_2 = "http://localhost:3004/precos";
+// URLs dos fornecedores
+
+const urlValidation = [FORNECEDOR_1, FALLBACK_1, FALLBACK_2].every(
+  (v) => v !== undefined
+);
+
+if (!urlValidation) {
+  console.error("Variáveis de ambiente não configuradas.");
+  process.exit(1);
+}
 
 // Instâncias do Circuit Breaker com fallback configurado
 const fornecedor1CircuitBreaker = new CircuitBreaker(3, 30000, [
-  FALLBACK_1,
-  FALLBACK_2,
+  `${FALLBACK_1}/precos`,
+  `${FALLBACK_2}/precos`,
 ]);
 
 const buscarDadosDoFornecedor = async (url: string) => {
-  const response = await fetch(url, {
+  const response = await fetch(`${url}/precos`, {
     headers: { contentType: "application/json" },
   });
   if (!response.ok) throw new Error(`Erro ao buscar ${url}`);

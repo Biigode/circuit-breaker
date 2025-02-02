@@ -4,6 +4,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/precos", (req, res) => {
+  console.log("Recebendo  requisição no fornecedor 3");
   const produtos = [
     {
       id: 1,
@@ -30,5 +31,5 @@ app.get("/precos", (req, res) => {
 });
 
 app.listen(3004, () => {
-  console.log("Fornecedor 1 executando na porta 3002");
+  console.log("Fornecedor 1 executando na porta 3004");
 });

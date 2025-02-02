@@ -36,10 +36,13 @@ services:
       - fornecedor1
       - fornecedor2
       - fornecedor3
-    environment:
-      - NODE_ENV=production
     networks:
       - app-network
+    environment:
+      - NODE_ENV=production
+      - FORNECEDOR_1_URL=http://fornecedor1:3002
+      - FALLBACK_1_URL=http://fornecedor2:3003
+      - FALLBACK_2_URL=http://fornecedor3:3004
 
 networks:
   app-network:
